@@ -1,243 +1,154 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <title>Для тебя ❤️</title>
+<meta charset="UTF-8">
+<title>Валентинка 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-    
-    .card {
-    box-shadow: 0 0 30px rgba(255, 100, 150, 0.6);
-    animation: pulse 2.5s infinite;
-}
-
-/* Адаптация для экранов до 480px (смартфоны) */
-@media (max-width: 480px) {
-    .card {
-        width: 90%;
-        padding: 25px;
-    }
-
-    button {
-        padding: 12px 25px;
-        font-size: 16px;
-    }
-
-    #title {
-        font-size: 20px;
-    }
-
-    #text {
-        font-size: 14px;
-    }
-}
-
-@keyframes pulse {
-    0% { box-shadow: 0 0 20px rgba(255,100,150,0.4); }
-    50% { box-shadow: 0 0 40px rgba(255,100,150,0.9); }
-    100% { box-shadow: 0 0 20px rgba(255,100,150,0.4); }
-}
-        body {
-            background: linear-gradient(120deg, #ff758c, #ff7eb3);
-            font-family: Arial, sans-serif;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-        }
+<style>
 body {
-    animation: fadeIn 1.5s ease;
+    margin: 0;
+    height: 100vh;
+    background: #0f0f1a;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-#yes:hover {
-    transform: scale(1.15);
-    box-shadow: 0 0 20px rgba(255,255,255,0.9);
-}
-#title {
-    animation: glowText 3s infinite;
+.container {
+    z-index: 2;
 }
 
-@keyframes glowText {
-    0% { text-shadow: 0 0 5px white; }
-    50% { text-shadow: 0 0 20px #ffb3d9; }
-    100% { text-shadow: 0 0 5px white; }
-}
-#no {
-    animation: shake 1.5s infinite;
-}
-
-@keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-2px); }
-    50% { transform: translateX(2px); }
-    75% { transform: translateX(-2px); }
-    100% { transform: translateX(0); }
-}
-        .card {
-            background: rgba(0, 0, 0, 0.35);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            width: 320px;
-        }
-
-        button {
-            padding: 15px 30px;
-            font-size: 18px;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            margin: 10px;
-        }
-
-        #yes {
-            background: white;
-            color: #ff4b6e;
-        }
-
-        #no {
-            position: absolute;
-            background: #222;
-            color: white;
-        }
-
-        .heart {
-            position: fixed;
-            top: -20px;
-            font-size: 20px;
-            animation: fall linear infinite;
-            z-index: 1;
-            user-select: none;
-        }
-.explosion-heart {
-    position: fixed;
-    font-size: 22px;
-    pointer-events: none;
-    animation: explode 1s ease-out forwards;
-    z-index: 5;
+button {
+    padding: 15px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin: 10px;
 }
 
-@keyframes explode {
-    from {
-        transform: translate(0, 0) scale(1);
-        opacity: 1;
-    }
-    to {
-        transform: translate(var(--x), var(--y)) scale(0.5);
-        opacity: 0;
-    }
+#yesBtn {
+    background: #ff4d6d;
+    color: white;
 }
-        @keyframes fall {
-            to {
-                transform: translateY(110vh);
-            }
-        }
-    </style>
+
+#noBtn {
+    background: #444;
+    color: white;
+    position: absolute;
+}
+
+#reasonBox {
+    margin-top: 20px;
+}
+
+textarea {
+    width: 260px;
+    border-radius: 8px;
+    padding: 10px;
+    resize: none;
+}
+
+/* сердечки */
+.heart {
+    position: absolute;
+    color: pink;
+    font-size: 20px;
+    animation: float 6s linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh); }
+    100% { transform: translateY(-10vh); }
+}
+</style>
 </head>
 
 <body>
 
-<div class="card" id="card">
-    <h1 id="title">Ты будешь моей валентинкой? 💖</h1>
-    <p id="text">Подумай хорошо 😌</p>
+<div class="container">
+    <h1>Ты будешь моей валентинкой? 💘</h1>
 
-    <button id="yes" onclick="yesClick()">ДА</button>
-    <button id="no" onmouseover="moveNo()" onclick="fakeNo()">НЕТ</button>
+    <button id="yesBtn" onclick="yesClicked()">Да 💖</button>
+    <button id="noBtn" onclick="noClicked()">Нет 😢</button>
+
+    <div id="reasonBox" style="display:none;">
+        <p>Почему «нет»? 🥺</p>
+        <textarea id="reasonInput" rows="4" placeholder="Напиши, пожалуйста..."></textarea>
+        <br><br>
+        <button onclick="sendReason()">Отправить</button>
+    </div>
 </div>
 
 <script>
-    let attempts = 0;
-    let scale = 1;
+// убегающая кнопка "нет"
+const noBtn = document.getElementById("noBtn");
 
-    function moveNo() {
-        const no = document.getElementById("no");
-        const card = document.getElementById("card");
-        const text = document.getElementById("text");
+noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+});
 
-        const maxX = card.offsetWidth - no.offsetWidth;
-        const maxY = card.offsetHeight - no.offsetHeight;
-
-        no.style.left = Math.random() * maxX + "px";
-        no.style.top = Math.random() * maxY + "px";
-
-        attempts++;
-        scale -= 0.1;
-        no.style.transform = "scale(" + scale + ")";
-
-        if (attempts === 3) text.innerText = "Мне уже немного грустно 💔";
-        if (attempts === 6) text.innerText = "Ты точно уверена?.. 🥺";
-        if (attempts === 9) text.innerText = "Кажется, выбора нет 😏";
-
-        if (scale <= 0.3) {
-            no.style.display = "none";
-            text.innerText = "Кнопка «НЕТ» сдалась";
-        }
-    }
-
-    function fakeNo() {
-        alert("Ошибка ❌\nВариант недоступен 😏");
-    }
-
-    function yesClick() {
-    explodeHearts();
-
-    setTimeout(function () {
-        const card = document.getElementById("card");
-        card.innerHTML =
-            "<h1>УРААА 💘</h1>" +
-            "<p>Теперь ты официально моя валентинка ❤️</p>" +
-            "<p>Этот сайт был сделан специально для тебя</p>";
-    }, 600);
+function noClicked() {
+    document.getElementById("reasonBox").style.display = "block";
 }
-function explodeHearts() {
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
 
+// отправка причины
+function sendReason() {
+    const text = document.getElementById("reasonInput").value.trim();
+
+    if (text === "") {
+        alert("Нужно что-нибудь написать 💔");
+        return;
+    }
+
+    fetch("/save_reason", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ reason: text })
+    }).then(() => {
+        alert("Я понял… 💔");
+    });
+}
+
+// эффект "ДА"
+function yesClicked() {
     for (let i = 0; i < 30; i++) {
-        const heart = document.createElement("div");
-        heart.className = "explosion-heart";
-        heart.innerText = "❤️";
-
-        const x = (Math.random() - 0.5) * 400 + "px";
-        const y = (Math.random() - 0.5) * 400 + "px";
-
-        heart.style.left = centerX + "px";
-        heart.style.top = centerY + "px";
-        heart.style.setProperty("--x", x);
-        heart.style.setProperty("--y", y);
-
-        document.body.appendChild(heart);
-
-        setTimeout(function () {
-            heart.remove();
-        }, 1000);
+        createHeart(true);
     }
+    alert("УРААА 💖💖💖");
 }
-    function createHeart() {
-        const heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerText = "❤️";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
 
-        document.body.appendChild(heart);
+// фоновые сердечки
+function createHeart(explosion=false) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+    document.body.appendChild(heart);
 
-        setTimeout(function () {
-            heart.remove();
-        }, 6000);
+    if (explosion) {
+        heart.style.top = "50vh";
+        heart.style.animation = "none";
+        heart.animate([
+            { transform: "translate(0,0)", opacity: 1 },
+            { transform: translate(${Math.random()*200-100}px, ${Math.random()*200-100}px), opacity: 0 }
+        ], { duration: 1000 });
     }
 
-    setInterval(createHeart, 300);
+    setTimeout(() => heart.remove(), 6000);
+}
+
+setInterval(createHeart, 400);
 </script>
 
 </body>
